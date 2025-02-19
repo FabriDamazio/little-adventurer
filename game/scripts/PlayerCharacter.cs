@@ -1,10 +1,8 @@
 using Godot;
-using System;
 
 public partial class PlayerCharacter : CharacterBody3D
 {
 	public const float Speed = 5.0f;
-	public const float JumpVelocity = 4.5f;
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -14,12 +12,6 @@ public partial class PlayerCharacter : CharacterBody3D
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
-		}
-
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
 		}
 
 		// Get the input direction and handle the movement/deceleration.

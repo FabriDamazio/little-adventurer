@@ -4803,19 +4803,19 @@ _data = {
 
 [node name="Level" parent="." instance=ExtResource("1_any33")]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298459, 0)
 script = ExtResource("2_o3v1u")
 
-[node name="VisualNode" type="Node3D" parent="CharacterBody3D"]
+[node name="VisualNode" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0669876, 0)
 
-[node name="RootNode" type="Node3D" parent="CharacterBody3D/VisualNode"]
+[node name="RootNode" type="Node3D" parent="Player/VisualNode"]
 
-[node name="LittleAdventurerAndie_GameRig" type="Node3D" parent="CharacterBody3D/VisualNode/RootNode"]
+[node name="LittleAdventurerAndie_GameRig" type="Node3D" parent="Player/VisualNode/RootNode"]
 transform = Transform3D(40, 0, 0, 0, -4.76837e-06, 40, 0, -40, -4.76837e-06, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="CharacterBody3D/VisualNode/RootNode/LittleAdventurerAndie_GameRig"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Player/VisualNode/RootNode/LittleAdventurerAndie_GameRig"]
 bones/0/name = "DEF-spine"
 bones/0/parent = -1
 bones/0/rest = Transform3D(0.998176, -0.00919332, -0.059646, -0.0603504, -0.152054, -0.986526, 2.98023e-08, 0.988327, -0.152332, 5.51955e-05, 0.00101186, 0.0162702)
@@ -5517,24 +5517,24 @@ bones/99/position = Vector3(0, 0.00274351, 0)
 bones/99/rotation = Quaternion(1.38778e-17, 1.92593e-34, 1.38778e-17, 1)
 bones/99/scale = Vector3(1, 1, 1)
 
-[node name="LittleAdventurerAndieMesh" type="MeshInstance3D" parent="CharacterBody3D/VisualNode/RootNode/LittleAdventurerAndie_GameRig/Skeleton3D"]
+[node name="LittleAdventurerAndieMesh" type="MeshInstance3D" parent="Player/VisualNode/RootNode/LittleAdventurerAndie_GameRig/Skeleton3D"]
 material_override = ExtResource("2_q11vg")
 mesh = SubResource("ArrayMesh_7147j")
 skin = SubResource("Skin_7gvdd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/VisualNode"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/VisualNode"]
 libraries = {
 &"": SubResource("AnimationLibrary_0ee02")
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_q11vg")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D"]
+[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0.5, 0)
 collision_mask = 0
 spring_length = 25.0
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
 fov = 30.0
