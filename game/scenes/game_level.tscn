@@ -1,10 +1,13 @@
-[gd_scene load_steps=21 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=25 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
 [ext_resource type="Material" uid="uid://dsxg0h0pajegl" path="res://Asset/Characters/MainCharacter/LittleAdventurerAndie_Material.tres" id="2_q11vg"]
 [ext_resource type="PackedScene" uid="uid://xgpsrjv1wwgj" path="res://Asset/Characters/Sword/sword.tscn" id="4_lm4ec"]
 [ext_resource type="PackedScene" uid="uid://d3dw4mj627ytu" path="res://Asset/VFX/Scene/footstep_particle.tscn" id="5_qn5ic"]
+[ext_resource type="Script" uid="uid://b1hcesx3ba4jo" path="res://game/scripts/CollectableCoin.cs" id="6_gtgrq"]
+[ext_resource type="PackedScene" uid="uid://2ijeduybl61n" path="res://Asset/Environment/Scene/coin.tscn" id="7_tljap"]
+[ext_resource type="PackedScene" uid="uid://d26l7qkbcg5jp" path="res://Asset/VFX/Scene/coinPickup_particle.tscn" id="8_y7bt7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
 resource_name = "Material.001"
@@ -4801,12 +4804,14 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q11vg"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_f08eb"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Level" parent="." instance=ExtResource("1_any33")]
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0490054, 0)
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0490054, -5.0601)
 script = ExtResource("2_o3v1u")
 
 [node name="VisualNode" type="Node3D" parent="Player"]
@@ -5570,3 +5575,18 @@ light_color = Color(1, 0.866667, 0.462745, 1)
 light_energy = 0.5
 light_specular = 0.2
 omni_range = 3.0
+
+[node name="CollectableCoin" type="Node3D" parent="."]
+script = ExtResource("6_gtgrq")
+
+[node name="VisualNodeCoin" parent="CollectableCoin" instance=ExtResource("7_tljap")]
+unique_name_in_owner = true
+
+[node name="CoinVFXNode" parent="CollectableCoin" instance=ExtResource("8_y7bt7")]
+unique_name_in_owner = true
+
+[node name="CoinArea3D" type="Area3D" parent="CollectableCoin"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectableCoin/CoinArea3D"]
+shape = SubResource("SphereShape3D_f08eb")
