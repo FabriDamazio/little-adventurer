@@ -4808,6 +4808,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298459, 0)
 script = ExtResource("2_o3v1u")
 
 [node name="VisualNode" type="Node3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0669876, 0)
 
 [node name="RootNode" type="Node3D" parent="Player/VisualNode"]
