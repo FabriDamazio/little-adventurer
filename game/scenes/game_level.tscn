@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=19 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
+[ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
 [ext_resource type="Material" uid="uid://dsxg0h0pajegl" path="res://Asset/Characters/MainCharacter/LittleAdventurerAndie_Material.tres" id="2_q11vg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
@@ -4803,9 +4804,11 @@ _data = {
 [node name="Level" parent="." instance=ExtResource("1_any33")]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00365725, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298459, 0)
+script = ExtResource("2_o3v1u")
 
 [node name="VisualNode" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0669876, 0)
 
 [node name="RootNode" type="Node3D" parent="CharacterBody3D/VisualNode"]
 
@@ -5530,6 +5533,7 @@ shape = SubResource("CapsuleShape3D_q11vg")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D"]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0.5, 0)
+collision_mask = 0
 spring_length = 25.0
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/SpringArm3D"]
