@@ -5539,3 +5539,10 @@ spring_length = 25.0
 
 [node name="Camera3D" type="Camera3D" parent="Player/SpringArm3D"]
 fov = 30.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+light_color = Color(1, 0.866667, 0.462745, 1)
+light_energy = 0.5
+light_specular = 0.2
+omni_range = 3.0
