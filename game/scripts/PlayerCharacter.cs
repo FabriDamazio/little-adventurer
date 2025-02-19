@@ -6,11 +6,13 @@ public partial class PlayerCharacter : CharacterBody3D
 
     private Node3D _visualNode;
     private AnimationPlayer _animationPlayer;
+    private GpuParticles3D _footStepVFX;
 
     public override void _Ready()
     {
         _visualNode = GetNode<Node3D>("%VisualNode");
         _animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
+        _footStepVFX = GetNode<GpuParticles3D>("%Footstep_GPUParticles3D");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -32,12 +34,14 @@ public partial class PlayerCharacter : CharacterBody3D
             velocity.X = direction.X * Speed;
             velocity.Z = direction.Z * Speed;
             _animationPlayer.Play("LittleAdventurerAndie_Run");
+            _footStepVFX.Emitting = true;
         }
         else
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
             _animationPlayer.Play("LittleAdventurerAndie_Idel");
+            _footStepVFX.Emitting = false;
         }
 
         Velocity = velocity;

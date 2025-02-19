@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=21 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
 [ext_resource type="Material" uid="uid://dsxg0h0pajegl" path="res://Asset/Characters/MainCharacter/LittleAdventurerAndie_Material.tres" id="2_q11vg"]
 [ext_resource type="PackedScene" uid="uid://xgpsrjv1wwgj" path="res://Asset/Characters/Sword/sword.tscn" id="4_lm4ec"]
+[ext_resource type="PackedScene" uid="uid://d3dw4mj627ytu" path="res://Asset/VFX/Scene/footstep_particle.tscn" id="5_qn5ic"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
 resource_name = "Material.001"
@@ -5545,6 +5546,11 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_0ee02")
 }
+
+[node name="VFX" type="Node3D" parent="Player/VisualNode"]
+
+[node name="Footstep_GPUParticles3D" parent="Player/VisualNode/VFX" instance=ExtResource("5_qn5ic")]
+unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
