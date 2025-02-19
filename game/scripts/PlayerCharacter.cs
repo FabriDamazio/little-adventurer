@@ -5,10 +5,12 @@ public partial class PlayerCharacter : CharacterBody3D
     public const float Speed = 5.0f;
 
     private Node3D _visualNode;
+    private AnimationPlayer _animationPlayer;
 
     public override void _Ready()
     {
         _visualNode = GetNode<Node3D>("%VisualNode");
+        _animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -29,11 +31,13 @@ public partial class PlayerCharacter : CharacterBody3D
         {
             velocity.X = direction.X * Speed;
             velocity.Z = direction.Z * Speed;
+            _animationPlayer.Play("LittleAdventurerAndie_Run");
         }
         else
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+            _animationPlayer.Play("LittleAdventurerAndie_Idel");
         }
 
         Velocity = velocity;
