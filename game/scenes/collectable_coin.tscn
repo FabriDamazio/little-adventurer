@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3qqrmjqu3bsa"]
+
+[ext_resource type="Script" uid="uid://b1hcesx3ba4jo" path="res://game/scripts/CollectableCoin.cs" id="1_fmung"]
+[ext_resource type="PackedScene" uid="uid://2ijeduybl61n" path="res://Asset/Environment/Scene/coin.tscn" id="2_v24b6"]
+[ext_resource type="PackedScene" uid="uid://d26l7qkbcg5jp" path="res://Asset/VFX/Scene/coinPickup_particle.tscn" id="3_dxauu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f08eb"]
+
+[sub_resource type="Animation" id="Animation_tljap"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%VisualNodeCoin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%VisualNodeCoin:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%VisualNodeCoin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gtgrq"]
+resource_name = "collected"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%VisualNodeCoin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.301622, 0.400739),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2, 0), Vector3(0, 1.7, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%VisualNodeCoin:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.603245, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%VisualNodeCoin:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7bt7"]
+_data = {
+&"RESET": SubResource("Animation_tljap"),
+&"collected": SubResource("Animation_gtgrq")
+}
+
+[node name="CollectableCoin" type="Node3D"]
+script = ExtResource("1_fmung")
+
+[node name="VisualNodeCoin" parent="." instance=ExtResource("2_v24b6")]
+unique_name_in_owner = true
+
+[node name="CoinVFXNode" parent="." instance=ExtResource("3_dxauu")]
+unique_name_in_owner = true
+
+[node name="CoinArea3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CoinArea3D"]
+shape = SubResource("SphereShape3D_f08eb")
+
+[node name="CoinAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_y7bt7")
+}

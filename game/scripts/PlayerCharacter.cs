@@ -3,6 +3,10 @@ using Godot;
 public partial class PlayerCharacter : CharacterBody3D
 {
     public const float Speed = 5.0f;
+    public int CoinNumber = 0;
+
+    [Signal]
+    public delegate void CoinNumberUpdatedEventHandler(int value);
 
     private Node3D _visualNode;
     private AnimationPlayer _animationPlayer;
@@ -54,5 +58,12 @@ public partial class PlayerCharacter : CharacterBody3D
         }
 
         MoveAndSlide();
+    }
+
+    public void AddCoin(int value)
+    {
+        CoinNumber += value;
+        EmitSignal(SignalName.CoinNumberUpdated, CoinNumber);
+        GD.Print(CoinNumber);
     }
 }

@@ -5,9 +5,9 @@
 [ext_resource type="Material" uid="uid://dsxg0h0pajegl" path="res://Asset/Characters/MainCharacter/LittleAdventurerAndie_Material.tres" id="2_q11vg"]
 [ext_resource type="PackedScene" uid="uid://xgpsrjv1wwgj" path="res://Asset/Characters/Sword/sword.tscn" id="4_lm4ec"]
 [ext_resource type="PackedScene" uid="uid://d3dw4mj627ytu" path="res://Asset/VFX/Scene/footstep_particle.tscn" id="5_qn5ic"]
-[ext_resource type="Script" uid="uid://b1hcesx3ba4jo" path="res://game/scripts/CollectableCoin.cs" id="6_gtgrq"]
-[ext_resource type="PackedScene" uid="uid://2ijeduybl61n" path="res://Asset/Environment/Scene/coin.tscn" id="7_tljap"]
-[ext_resource type="PackedScene" uid="uid://d26l7qkbcg5jp" path="res://Asset/VFX/Scene/coinPickup_particle.tscn" id="8_y7bt7"]
+[ext_resource type="PackedScene" uid="uid://b3qqrmjqu3bsa" path="res://game/scenes/collectable_coin.tscn" id="6_8l4sb"]
+[ext_resource type="Texture2D" uid="uid://byo4gdwy76yce" path="res://Asset/UI/Coin.png" id="7_amc0q"]
+[ext_resource type="Script" uid="uid://c5e0oskmlkqut" path="res://game/scripts/GameplayUIManager.cs" id="7_gtgrq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
 resource_name = "Material.001"
@@ -4804,7 +4804,9 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q11vg"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_f08eb"]
+[sub_resource type="LabelSettings" id="LabelSettings_gtgrq"]
+font_size = 50
+font_color = Color(1, 0.929412, 0.192157, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -5576,17 +5578,48 @@ light_energy = 0.5
 light_specular = 0.2
 omni_range = 3.0
 
-[node name="CollectableCoin" type="Node3D" parent="."]
-script = ExtResource("6_gtgrq")
+[node name="CollectableCoin" parent="." instance=ExtResource("6_8l4sb")]
 
-[node name="VisualNodeCoin" parent="CollectableCoin" instance=ExtResource("7_tljap")]
+[node name="CollectableCoin2" parent="." instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10783, 0, 0)
+
+[node name="UI" type="Node3D" parent="."]
+
+[node name="ControlGameplayUI" type="Control" parent="UI" node_paths=PackedStringArray("Player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_gtgrq")
+Player = NodePath("../../Player")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ControlGameplayUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.0
+offset_bottom = 69.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainerCoin" type="HBoxContainer" parent="UI/ControlGameplayUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="LabelCoin" type="Label" parent="UI/ControlGameplayUI/MarginContainer/HBoxContainerCoin"]
 unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_gtgrq")
 
-[node name="CoinVFXNode" parent="CollectableCoin" instance=ExtResource("8_y7bt7")]
-unique_name_in_owner = true
-
-[node name="CoinArea3D" type="Area3D" parent="CollectableCoin"]
-unique_name_in_owner = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectableCoin/CoinArea3D"]
-shape = SubResource("SphereShape3D_f08eb")
+[node name="TextureRectCoin" type="TextureRect" parent="UI/ControlGameplayUI/MarginContainer/HBoxContainerCoin"]
+layout_mode = 2
+texture = ExtResource("7_amc0q")
+expand_mode = 2
