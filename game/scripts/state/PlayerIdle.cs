@@ -2,13 +2,12 @@ using Godot;
 
 public partial class PlayerIdle : StateBase
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public override void StateUpdate(double delta)
+    {
+        if (CharacterBody3D.Direction != Vector3.Zero)
+        {
+            StateMachine.SwitchTo("Run");
+        }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    }
 }

@@ -6,7 +6,7 @@ public partial class StateBase : Node
     public string AnimationName = string.Empty;
 
     public StateMachine StateMachine;
-    public CharacterBody3D CharacterBody3D;
+    public PlayerCharacter CharacterBody3D;
     public AnimationPlayer AnimationPlayer;
 
 
@@ -14,18 +14,18 @@ public partial class StateBase : Node
     {
     }
 
-    public void Enter()
+    public virtual void Enter()
     {
         GD.Print($"Entering state: {Name}");
         AnimationPlayer.Play(AnimationName);
     }
 
-    public void Exit()
+    public virtual void Exit()
     {
         GD.Print($"Exiting state: {AnimationName}");
     }
 
-    public void StateUpdate(double delta)
+    public virtual void StateUpdate(double delta)
     {
 
     }

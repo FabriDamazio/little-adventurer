@@ -16,7 +16,7 @@ public partial class StateMachine : Node
         {
             var state = child as StateBase;
             state.StateMachine = this;
-            state.CharacterBody3D = GetParent<CharacterBody3D>();
+            state.CharacterBody3D = GetParent<PlayerCharacter>();
             state.AnimationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
             state.ShowInfo();
         }
