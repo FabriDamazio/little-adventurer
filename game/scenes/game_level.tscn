@@ -7853,7 +7853,7 @@ mesh = SubResource("ArrayMesh_7147j")
 skin = SubResource("Skin_7gvdd")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Player/VisualNode/RootNode/LittleAdventurerAndie_GameRig/Skeleton3D"]
-transform = Transform3D(-0.962009, -0.237405, -0.13479, -0.0399462, 0.610828, -0.79075, 0.270062, -0.755326, -0.597111, -0.00973767, 0.00376249, 0.022656)
+transform = Transform3D(-0.962009, -0.237405, -0.13479, -0.0399462, 0.610829, -0.79075, 0.270062, -0.755326, -0.597111, -0.00973767, 0.00376249, 0.022656)
 bone_name = "DEF-hand.R"
 bone_idx = 67
 
