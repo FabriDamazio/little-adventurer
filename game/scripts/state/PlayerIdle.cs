@@ -4,6 +4,11 @@ public partial class PlayerIdle : StateBase
 {
     public override void StateUpdate(double delta)
     {
+        if (CharacterBody3D.AttackKeyPressed)
+        {
+            StateMachine.SwitchTo("Attack");
+        }
+
         if (CharacterBody3D.SlideKeyPressed)
         {
             StateMachine.SwitchTo("Slide");

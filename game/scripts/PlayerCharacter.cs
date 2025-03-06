@@ -6,6 +6,7 @@ public partial class PlayerCharacter : CharacterBody3D
     public int CoinNumber = 0;
     public Vector3 Direction;
     public bool SlideKeyPressed;
+    public bool AttackKeyPressed;
 
     [Signal]
     public delegate void CoinNumberUpdatedEventHandler(int value);
@@ -37,6 +38,7 @@ public partial class PlayerCharacter : CharacterBody3D
         Direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
         SlideKeyPressed = Input.IsActionJustPressed("slide");
+        AttackKeyPressed = Input.IsActionJustPressed("attack");
 
         MoveAndSlide();
     }

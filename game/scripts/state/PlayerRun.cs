@@ -32,6 +32,11 @@ public partial class PlayerRun : StateBase
                   CharacterBody3D.VisualNode.Rotation.Z);
         }
 
+        if (CharacterBody3D.AttackKeyPressed)
+        {
+            StateMachine.SwitchTo("Attack");
+        }
+
         if (CharacterBody3D.SlideKeyPressed)
         {
             StateMachine.SwitchTo("Slide");
