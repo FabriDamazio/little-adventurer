@@ -7372,9 +7372,10 @@ AnimationName = "LittleAdventurerAndie_Run"
 script = ExtResource("8_lk8kj")
 AnimationName = "LittleAdventurerAndie_Roll"
 
-[node name="Attack" type="Node3D" parent="Player/StateMachine" node_paths=PackedStringArray("HitBoxCollisionShape", "BladeMaterialEffectAnimationPlayer", "VFXBlade")]
+[node name="Attack" type="Node3D" parent="Player/StateMachine" node_paths=PackedStringArray("HitBoxCollisionShape", "HitBox", "BladeMaterialEffectAnimationPlayer", "VFXBlade")]
 script = ExtResource("9_m2l23")
 HitBoxCollisionShape = NodePath("../../VisualNode/HitBox/CollisionShape3D")
+HitBox = NodePath("../../VisualNode/HitBox")
 BladeMaterialEffectAnimationPlayer = NodePath("../../VisualNode/VFX/BladeMaterialEffectAnimationPlayer")
 VFXBlade = NodePath("../../VisualNode/VFX/Sword_VFX_Models/RootNode/Blade VFX 01")
 AnimationName = "LittleAdventurerAndie_ATTACK_01"
@@ -8235,7 +8236,7 @@ expand_mode = 2
 [node name="CollectableCoin2" parent="Coins" instance=ExtResource("6_8l4sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10783, 0, 0)
 
-[node name="Enemy" type="CharacterBody3D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Enemy" type="CharacterBody3D" parent="." node_paths=PackedStringArray("Player") groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.27713, 0, -20.0968)
 script = ExtResource("8_y7bt7")
 Player = NodePath("../Player")

@@ -6,10 +6,20 @@ public partial class PlayerAttack : StateBase
     public CollisionShape3D HitBoxCollisionShape;
 
     [Export]
+    public Area3D HitBox;
+
+    [Export]
     public AnimationPlayer BladeMaterialEffectAnimationPlayer;
 
     [Export]
     public Node3D VFXBlade;
+
+    public int Damage = 40;
+
+    public override void _Ready()
+    {
+        HitBox.BodyEntered += OnHitBoxBodyEntered;
+    }
 
     public void EnableHitBox()
     {
@@ -49,4 +59,14 @@ public partial class PlayerAttack : StateBase
             StateMachine.SwitchTo("Idle");
         }
     }
+
+    public void OnHitBoxBodyEntered(Node3D body)
+    {
+        if (body.IsInGroup("enemy"))
+        {
+            var enemy = body as Enemy;
+            enemy.ApplyDamage(Damage);
+        }
+    }
+
 }

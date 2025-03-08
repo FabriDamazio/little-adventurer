@@ -7,6 +7,9 @@ public partial class Enemy : CharacterBody3D
     [Export]
     public PlayerCharacter Player;
 
+    public int MaxHealth = 100;
+    public int CurrentHealth;
+
     private NavigationAgent3D _navigationAgent3D;
     private Node3D _visualNode;
     private AnimationPlayer _animationPlayer;
@@ -18,6 +21,7 @@ public partial class Enemy : CharacterBody3D
         _navigationAgent3D = GetNode<NavigationAgent3D>("%NavigationAgent3D");
         _visualNode = GetNode<Node3D>("%VisualNodeEnemy");
         _animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayerEnemy");
+        CurrentHealth = MaxHealth;
     }
 
 
@@ -45,5 +49,12 @@ public partial class Enemy : CharacterBody3D
         }
 
         MoveAndSlide();
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        CurrentHealth -= damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        GD.Print($"{Name} health: {CurrentHealth}");
     }
 }
