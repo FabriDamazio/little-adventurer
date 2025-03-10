@@ -14,6 +14,9 @@ public partial class PlayerAttack : StateBase
     [Export]
     public Node3D VFXBlade;
 
+    [Export]
+    public GpuParticles3D VFXHit;
+
     public int Damage = 40;
 
     public override void _Ready()
@@ -66,7 +69,13 @@ public partial class PlayerAttack : StateBase
         {
             var enemy = body as Enemy;
             enemy.ApplyDamage(Damage);
+
+            var position = body.GlobalPosition;
+            position.Y = 1.5f;
+            VFXHit.GlobalPosition = position;
+            VFXHit.Restart();
         }
+
     }
 
 }

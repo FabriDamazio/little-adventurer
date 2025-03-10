@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=62 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cd4ppgfk1ifpu" path="res://game/scripts/Enemy.cs" id="8_y7bt7"]
 [ext_resource type="Script" uid="uid://co1r66re1ucm5" path="res://game/scripts/state/PlayerAttack.cs" id="9_m2l23"]
 [ext_resource type="Material" uid="uid://6y8a7flk0cxy" path="res://Asset/Characters/NPC/npc_material.tres" id="9_tljap"]
+[ext_resource type="PackedScene" uid="uid://k5prn3b4lgvq" path="res://Asset/VFX/Scene/hit_particle.tscn" id="11_bccyy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
 resource_name = "Material.001"
@@ -7409,12 +7410,13 @@ AnimationName = "LittleAdventurerAndie_Run"
 script = ExtResource("8_lk8kj")
 AnimationName = "LittleAdventurerAndie_Roll"
 
-[node name="Attack" type="Node3D" parent="Player/StateMachine" node_paths=PackedStringArray("HitBoxCollisionShape", "HitBox", "BladeMaterialEffectAnimationPlayer", "VFXBlade")]
+[node name="Attack" type="Node3D" parent="Player/StateMachine" node_paths=PackedStringArray("HitBoxCollisionShape", "HitBox", "BladeMaterialEffectAnimationPlayer", "VFXBlade", "VFXHit")]
 script = ExtResource("9_m2l23")
 HitBoxCollisionShape = NodePath("../../VisualNode/HitBox/CollisionShape3D")
 HitBox = NodePath("../../VisualNode/HitBox")
 BladeMaterialEffectAnimationPlayer = NodePath("../../VisualNode/VFX/BladeMaterialEffectAnimationPlayer")
 VFXBlade = NodePath("../../VisualNode/VFX/Sword_VFX_Models/RootNode/Blade VFX 01")
+VFXHit = NodePath("../../VisualNode/VFX/hit_particle")
 AnimationName = "LittleAdventurerAndie_ATTACK_01"
 
 [node name="VisualNode" type="Node3D" parent="Player"]
@@ -8198,6 +8200,8 @@ root_node = NodePath("../Sword_VFX_Models")
 libraries = {
 &"": SubResource("AnimationLibrary_a2hsi")
 }
+
+[node name="hit_particle" parent="Player/VisualNode/VFX" instance=ExtResource("11_bccyy")]
 
 [node name="HitBox" type="Area3D" parent="Player/VisualNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 1)
