@@ -30,5 +30,10 @@ public partial class EnemyChasePlayer : EnemyStateBase
         {
             StateMachine.SwitchTo("Attack");
         }
+
+        if (CharacterBody3D.CurrentHealth == 0)
+        {
+            StateMachine.SwitchTo("Dead");
+        }
     }
 }

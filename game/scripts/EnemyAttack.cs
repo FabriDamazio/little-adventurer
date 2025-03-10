@@ -8,6 +8,9 @@ public partial class EnemyAttack : EnemyStateBase
     [Export]
     public Area3D HitBox;
 
+    [Export]
+    public AnimationPlayer VFXAnimationPlayer;
+
     public int Damage = 30;
     public Vector3 lookDir;
     public Vector2 lookDir2D;
@@ -55,6 +58,11 @@ public partial class EnemyAttack : EnemyStateBase
         {
             StateMachine.SwitchTo("ChasePlayer");
         }
+
+        if (CharacterBody3D.CurrentHealth == 0)
+        {
+            StateMachine.SwitchTo("Dead");
+        }
     }
 
     public void OnHitBoxBodyEntered(Node3D body)
@@ -64,5 +72,10 @@ public partial class EnemyAttack : EnemyStateBase
             var player = body as PlayerCharacter;
             player.TakeDamage(Damage);
         }
+    }
+
+    public void PlaySmashVFX()
+    {
+        VFXAnimationPlayer.Play("PlayParticle");
     }
 }
