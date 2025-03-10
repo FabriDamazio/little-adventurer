@@ -7,6 +7,9 @@ public partial class Enemy : CharacterBody3D
     [Export]
     public PlayerCharacter Player;
 
+    [Export]
+      public AnimationPlayer MaterialEffectAnimationPlayer;
+
     public int MaxHealth = 100;
     public int CurrentHealth;
 
@@ -56,5 +59,6 @@ public partial class Enemy : CharacterBody3D
         CurrentHealth -= damage;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         GD.Print($"{Name} health: {CurrentHealth}");
+        MaterialEffectAnimationPlayer.Play("flash");
     }
 }
