@@ -18,6 +18,9 @@ public partial class PlayerAttack : StateBase
     public GpuParticles3D VFXHit;
 
     public int Damage = 40;
+    public double SlideSpeed = 500;
+    public double RemainSlideDuration;
+    public Vector3 FacingDir;
 
     public override void _Ready()
     {
@@ -45,6 +48,8 @@ public partial class PlayerAttack : StateBase
         VFXBlade.Visible = true;
         BladeMaterialEffectAnimationPlayer.Stop();
         BladeMaterialEffectAnimationPlayer.Play("PlayBladeVFX");
+
+        RemainSlideDuration = AnimationPlayer.CurrentAnimationLength * 0.3;
     }
 
     public override void Exit()
@@ -57,6 +62,24 @@ public partial class PlayerAttack : StateBase
 
     public override void StateUpdate(double delta)
     {
+        RemainSlideDuration -= delta;
+        FacingDir = CharacterBody3D.VisualNode.Transform.Basis.Z;
+
+        if (RemainSlideDuration > 0)
+        {
+            var newVelocity = CharacterBody3D.Velocity;
+            newVelocity.X = FacingDir.X * (float)SlideSpeed * (float)delta;
+            newVelocity.Z = FacingDir.Z * (float)SlideSpeed * (float)delta;
+            CharacterBody3D.Velocity = newVelocity;
+        }
+        else
+        {
+            var newVelocity = CharacterBody3D.Velocity;
+            newVelocity.X = Mathf.MoveToward(CharacterBody3D.Velocity.X, 0, PlayerCharacter.Speed);
+            newVelocity.Z = Mathf.MoveToward(CharacterBody3D.Velocity.Z, 0, PlayerCharacter.Speed);
+            CharacterBody3D.Velocity = newVelocity;
+        }
+
         if (AnimationPlayer.IsPlaying() == false)
         {
             StateMachine.SwitchTo("Idle");
@@ -74,6 +97,8 @@ public partial class PlayerAttack : StateBase
             position.Y = 1.5f;
             VFXHit.GlobalPosition = position;
             VFXHit.Restart();
+
+            RemainSlideDuration = 0;
         }
 
     }
