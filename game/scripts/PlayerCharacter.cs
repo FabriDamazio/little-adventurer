@@ -49,4 +49,9 @@ public partial class PlayerCharacter : CharacterBody3D
         EmitSignal(SignalName.CoinNumberUpdated, CoinNumber);
         GD.Print(CoinNumber);
     }
+
+    public void TakeDamage(int damage)
+    {
+        GD.Print($"The Player took damage: {damage}");
+    }
 }
