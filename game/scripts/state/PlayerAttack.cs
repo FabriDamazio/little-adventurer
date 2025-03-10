@@ -17,6 +17,11 @@ public partial class PlayerAttack : StateBase
     [Export]
     public GpuParticles3D VFXHit;
 
+    [Export]
+    public string NextAttackState;
+
+    public bool CanAttackAgain;
+
     public int Damage = 40;
     public double SlideSpeed = 500;
     public double RemainSlideDuration;
@@ -42,6 +47,8 @@ public partial class PlayerAttack : StateBase
     public override void Enter()
     {
         base.Enter();
+
+        CanAttackAgain = false;
 
         CharacterBody3D.Velocity = new Vector3(0, CharacterBody3D.Velocity.Y, 0);
 
@@ -84,6 +91,11 @@ public partial class PlayerAttack : StateBase
         {
             StateMachine.SwitchTo("Idle");
         }
+
+        if (NextAttackState != string.Empty && CanAttackAgain && CharacterBody3D.AttackKeyPressed)
+        {
+            StateMachine.SwitchTo(NextAttackState);
+        }
     }
 
     public void OnHitBoxBodyEntered(Node3D body)
@@ -101,6 +113,11 @@ public partial class PlayerAttack : StateBase
             RemainSlideDuration = 0;
         }
 
+    }
+
+    public void SetCanAttackAgain()
+    {
+        CanAttackAgain = true;
     }
 
 }
