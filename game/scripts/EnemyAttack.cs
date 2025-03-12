@@ -70,7 +70,7 @@ public partial class EnemyAttack : EnemyStateBase
         if (body.IsInGroup("player"))
         {
             var player = body as PlayerCharacter;
-            player.TakeDamage(Damage);
+            player.TakeDamage(Damage, CharacterBody3D.GlobalPosition);
         }
     }
 

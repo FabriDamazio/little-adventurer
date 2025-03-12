@@ -7,6 +7,8 @@ public partial class PlayerCharacter : CharacterBody3D
     public Vector3 Direction;
     public bool SlideKeyPressed;
     public bool AttackKeyPressed;
+    public int MaxHealth = 100;
+    public int CurrentHealth;
 
     [Signal]
     public delegate void CoinNumberUpdatedEventHandler(int value);
@@ -20,6 +22,7 @@ public partial class PlayerCharacter : CharacterBody3D
         VisualNode = GetNode<Node3D>("%VisualNode");
         AnimationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
         FootStepVFX = GetNode<GpuParticles3D>("%Footstep_GPUParticles3D");
+        CurrentHealth = MaxHealth;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -50,8 +53,19 @@ public partial class PlayerCharacter : CharacterBody3D
         GD.Print(CoinNumber);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 enemyPosition)
     {
-        GD.Print($"The Player took damage: {damage}");
+        CurrentHealth -= damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        GD.Print($"The Player took {damage} damage. Current health: {CurrentHealth}");
+
+        GetNode<StateMachine>("StateMachine").SwitchTo("Hurt");
+
+        if (GetNode<StateMachine>("StateMachine").CurrentState.Name == "Hurt")
+        {
+            var state = GetNode<StateMachine>("StateMachine").CurrentState as PlayerHurt;
+            state.PushBackDir = (GlobalPosition - enemyPosition);
+            GetNode<StateMachine>("StateMachine").CurrentState = state;
+        }
     }
 }
