@@ -13,6 +13,9 @@ public partial class PlayerCharacter : CharacterBody3D
     [Signal]
     public delegate void CoinNumberUpdatedEventHandler(int value);
 
+    [Signal]
+    public delegate void PlayerHealthUpdatedEventHandler(int newValue, int maxValue);
+
     public Node3D VisualNode;
     public AnimationPlayer AnimationPlayer;
     public GpuParticles3D FootStepVFX;
@@ -53,10 +56,15 @@ public partial class PlayerCharacter : CharacterBody3D
         GD.Print(CoinNumber);
     }
 
+    public void SetCurrentHealth(int value)
+    {
+        CurrentHealth = value;
+        EmitSignal(SignalName.PlayerHealthUpdated, CurrentHealth, MaxHealth);
+    }
+
     public void TakeDamage(int damage, Vector3 enemyPosition)
     {
-        CurrentHealth -= damage;
-        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        SetCurrentHealth(Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth));
         GD.Print($"The Player took {damage} damage. Current health: {CurrentHealth}");
 
         GetNode<StateMachine>("StateMachine").SwitchTo("Hurt");

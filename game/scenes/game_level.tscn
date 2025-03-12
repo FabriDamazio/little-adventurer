@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=87 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
@@ -5118,6 +5118,20 @@ _data = {
 font_size = 50
 font_color = Color(1, 0.929412, 0.192157, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usg65"]
+bg_color = Color(0, 0, 0, 0.45098)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6oioe"]
+bg_color = Color(1, 0.929412, 0.192157, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77wx7"]
 resource_name = "NPC_02.001"
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
@@ -8520,7 +8534,7 @@ omni_range = 3.0
 
 [node name="UI" type="Node3D" parent="."]
 
-[node name="ControlGameplayUI" type="Control" parent="UI" node_paths=PackedStringArray("Player")]
+[node name="ControlGameplayUI" type="Control" parent="UI" node_paths=PackedStringArray("Player", "HealthBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -8529,6 +8543,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_gtgrq")
 Player = NodePath("../../Player")
+HealthBar = NodePath("MarginContainer2/HBoxContainerHealth/ProgressBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/ControlGameplayUI"]
 layout_mode = 1
@@ -8558,6 +8573,24 @@ label_settings = SubResource("LabelSettings_gtgrq")
 layout_mode = 2
 texture = ExtResource("7_amc0q")
 expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/ControlGameplayUI"]
+layout_mode = 1
+offset_right = 113.0
+offset_bottom = 69.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+
+[node name="HBoxContainerHealth" type="HBoxContainer" parent="UI/ControlGameplayUI/MarginContainer2"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/ControlGameplayUI/MarginContainer2/HBoxContainerHealth"]
+custom_minimum_size = Vector2(400, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_usg65")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6oioe")
+value = 50.0
+show_percentage = false
 
 [node name="Coins" type="Node3D" parent="."]
 
