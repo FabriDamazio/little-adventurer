@@ -55,7 +55,7 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specul
 uniform vec4 ColorParameter : source_color;
 uniform float Intensity;
 uniform sampler2D Texture2DParameter;
-uniform float Emission = 15;
+uniform float Emission = 15.0;
 
 
 

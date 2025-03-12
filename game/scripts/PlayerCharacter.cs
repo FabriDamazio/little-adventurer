@@ -76,4 +76,9 @@ public partial class PlayerCharacter : CharacterBody3D
             GetNode<StateMachine>("StateMachine").CurrentState = state;
         }
     }
+
+    public void AddHealth(int value)
+    {
+        SetCurrentHealth(Mathf.Clamp(CurrentHealth + value, 0, MaxHealth));
+    }
 }
