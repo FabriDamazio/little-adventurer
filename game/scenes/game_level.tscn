@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=89 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bvej4q1etg70" path="res://game/scripts/EnemyDead.cs" id="19_nib0j"]
 [ext_resource type="Material" uid="uid://bbxy4x3sqrxja" path="res://Asset/VFX/Shader/Alpha.tres" id="22_nib0j"]
 [ext_resource type="PackedScene" uid="uid://bcglnlgp4bmhu" path="res://game/scenes/collectable_healing_orb.tscn" id="26_6oioe"]
+[ext_resource type="PackedScene" uid="uid://cwcfvdbaw6jq3" path="res://game/scenes/gate.tscn" id="27_ladnh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7ynx"]
 resource_name = "Material.001"
@@ -9020,3 +9021,6 @@ avoidance_enabled = true
 navigation_mesh = SubResource("NavigationMesh_y7bt7")
 
 [node name="Level" parent="NavigationRegion3D" instance=ExtResource("1_any33")]
+
+[node name="Gate" parent="." instance=ExtResource("27_ladnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
