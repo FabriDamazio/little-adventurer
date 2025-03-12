@@ -8,6 +8,9 @@ public partial class EnemyDead : EnemyStateBase
     [Export]
     public AnimationPlayer MaterialEffectAnimationPlayer;
 
+    [Export]
+    public PackedScene HealingOrb;
+
     public override async void Enter()
     {
         base.Enter();
@@ -20,5 +23,10 @@ public partial class EnemyDead : EnemyStateBase
         await ToSignal(GetTree().CreateTimer(3), "timeout");
 
         CharacterBody3D.QueueFree();
+
+        var dropItem = HealingOrb.Instantiate<CollectableHealingOrb>();
+        GetTree().Root.GetNode("Node3D").AddChild(dropItem);
+        dropItem.GlobalPosition = CharacterBody3D.GlobalPosition;
+
     }
 }
