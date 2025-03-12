@@ -3,8 +3,6 @@ using Godot;
 public partial class Enemy : CharacterBody3D
 {
     public const float Speed = 1.0f;
-
-    [Export]
     public PlayerCharacter Player;
 
     [Export]
@@ -26,6 +24,11 @@ public partial class Enemy : CharacterBody3D
         CurrentHealth = MaxHealth;
     }
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Player = GetTree().Root.GetNode<PlayerCharacter>("Node3D/Player");
+    }
 
 
     public override void _PhysicsProcess(double delta)
