@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=74 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
@@ -19,7 +19,10 @@
 [ext_resource type="PackedScene" uid="uid://k5prn3b4lgvq" path="res://Asset/VFX/Scene/hit_particle.tscn" id="11_bccyy"]
 [ext_resource type="Script" uid="uid://dm60m8x3ml7wo" path="res://game/scripts/Spawner.cs" id="19_4k5wf"]
 [ext_resource type="PackedScene" uid="uid://n6v6l7t0w0fs" path="res://game/scenes/enemy.tscn" id="20_usg65"]
+[ext_resource type="PackedScene" uid="uid://bj8v5o040vyyn" path="res://Asset/Environment/Scene/portal.tscn" id="25_usg65"]
+[ext_resource type="Script" uid="uid://xeji45fvsdxo" path="res://game/scripts/Portal.cs" id="26_ladnh"]
 [ext_resource type="PackedScene" uid="uid://cwcfvdbaw6jq3" path="res://game/scenes/gate.tscn" id="27_ladnh"]
+[ext_resource type="Script" uid="uid://pb5agttpmjxr" path="res://game/scripts/SubViewportResizer.cs" id="27_rknej"]
 [ext_resource type="Texture2D" uid="uid://wr1irf2y371x" path="res://Asset/Environment/Texture/Base_Color.png" id="28_mdega"]
 [ext_resource type="Texture2D" uid="uid://duoeqvqtin52j" path="res://Asset/Environment/Texture/Base_AO.png" id="29_sp6xb"]
 [ext_resource type="Texture2D" uid="uid://k5lkttmr1bn0" path="res://Asset/Environment/Texture/pillar_35_low_E.png" id="30_popxd"]
@@ -5193,6 +5196,26 @@ shadow_mesh = SubResource("ArrayMesh_iwc6x")
 [sub_resource type="BoxShape3D" id="BoxShape3D_cs6a8"]
 size = Vector3(35, 2, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6oioe"]
+size = Vector3(3, 6.5, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_usg65"]
+viewport_path = NodePath("GameLevel/Portal/Sprite3D/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_usg65"]
+font_size = 75
+font_color = Color(1, 0.866667, 0.192157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_usg65"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("7_amc0q")
+emission_enabled = true
+emission = Color(1, 0.866667, 0.192157, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_6oioe"]
+material = SubResource("StandardMaterial3D_usg65")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
@@ -6134,9 +6157,13 @@ show_percentage = false
 [node name="Coins" type="Node3D" parent="."]
 
 [node name="CollectableCoin" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.289, 0, -17.7694)
 
 [node name="CollectableCoin2" parent="Coins" instance=ExtResource("6_8l4sb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10783, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881157, 0, -18.3632)
+
+[node name="CollectableCoin3" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43637, 0, -18.3632)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_y7bt7")
@@ -6255,3 +6282,34 @@ shape = SubResource("BoxShape3D_cs6a8")
 
 [node name="Gate" parent="GameLevel/Level03" instance=ExtResource("27_ladnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -85)
+
+[node name="Portal" parent="GameLevel" node_paths=PackedStringArray("TextLabel", "Area3D") instance=ExtResource("25_usg65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 10, -99.5)
+script = ExtResource("26_ladnh")
+TextLabel = NodePath("Sprite3D/SubViewport/Label")
+Area3D = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="GameLevel/Portal"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/Portal/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 0)
+shape = SubResource("BoxShape3D_6oioe")
+
+[node name="Sprite3D" type="Sprite3D" parent="GameLevel/Portal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 5.5, 0.5)
+texture = SubResource("ViewportTexture_usg65")
+
+[node name="SubViewport" type="SubViewport" parent="GameLevel/Portal/Sprite3D"]
+transparent_bg = true
+size = Vector2i(200, 100)
+script = ExtResource("27_rknej")
+
+[node name="Label" type="Label" parent="GameLevel/Portal/Sprite3D/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "99"
+label_settings = SubResource("LabelSettings_usg65")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/Portal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6.3, 0)
+mesh = SubResource("QuadMesh_6oioe")
