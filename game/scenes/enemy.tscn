@@ -2524,9 +2524,10 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tljap"]
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("MaterialEffectAnimationPlayer") groups=["enemy"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("MaterialEffectAnimationPlayer", "DeadState") groups=["enemy"]]
 script = ExtResource("1_wfs5m")
 MaterialEffectAnimationPlayer = NodePath("VisualNodeEnemy/MaterialEffectAnimationPlayer")
+DeadState = NodePath("StateMachine/Dead")
 
 [node name="StateMachine" type="Node3D" parent="."]
 script = ExtResource("2_6rtnn")

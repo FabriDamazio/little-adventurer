@@ -8,6 +8,9 @@ public partial class Enemy : CharacterBody3D
     [Export]
     public AnimationPlayer MaterialEffectAnimationPlayer;
 
+    [Export]
+    public EnemyDead DeadState;
+
     public int MaxHealth = 100;
     public int CurrentHealth;
 

@@ -11,6 +11,9 @@ public partial class EnemyDead : EnemyStateBase
     [Export]
     public PackedScene HealingOrb;
 
+    [Signal]
+    public delegate void EnemyDeathEventHandler(Enemy enemy);
+
     public override async void Enter()
     {
         base.Enter();
@@ -22,6 +25,7 @@ public partial class EnemyDead : EnemyStateBase
 
         await ToSignal(GetTree().CreateTimer(3), "timeout");
 
+        EmitSignal(SignalName.EnemyDeath, CharacterBody3D);
         CharacterBody3D.QueueFree();
 
         var dropItem = HealingOrb.Instantiate<CollectableHealingOrb>();
