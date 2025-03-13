@@ -9,6 +9,7 @@ public partial class PlayerCharacter : CharacterBody3D
     public bool AttackKeyPressed;
     public int MaxHealth = 100;
     public int CurrentHealth;
+    public bool IsDead;
 
     [Signal]
     public delegate void CoinNumberUpdatedEventHandler(int value);

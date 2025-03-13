@@ -10,6 +10,9 @@ public partial class Portal : Node3D
     [Export]
     public Area3D Area3D;
 
+    [Signal]
+    public delegate void PlayerReachThePortalEventHandler();
+
     public override void _Ready()
     {
         TextLabel.Text = CoinRequired.ToString();
@@ -20,16 +23,16 @@ public partial class Portal : Node3D
     {
         if (body.IsInGroup("player"))
         {
-          var player = body as PlayerCharacter;
+            var player = body as PlayerCharacter;
 
-          if(player.CoinNumber >= CoinRequired)
-          {
-            GD.Print("GREAT");
-          }
-          else
-          {
-            GD.Print("NOT GREAT");
-          }
+            if (player.CoinNumber >= CoinRequired)
+            {
+                EmitSignal(SignalName.PlayerReachThePortal);
+            }
+            else
+            {
+                GD.Print("NOT GREAT");
+            }
         }
     }
 }

@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://ccxs78bwrumgx" path="res://Asset/UI/Text_GAMEOVER.png" id="24_f87b8"]
 [ext_resource type="Texture2D" uid="uid://bpdqrpwukluk0" path="res://Asset/UI/Text_PAUSE.png" id="25_7wmiq"]
 [ext_resource type="PackedScene" uid="uid://bj8v5o040vyyn" path="res://Asset/Environment/Scene/portal.tscn" id="25_usg65"]
-[ext_resource type="Script" uid="uid://bpmxtr2mp3lou" path="res://game/scripts/GameManagr.cs" id="26_6ubu6"]
+[ext_resource type="Script" uid="uid://bpmxtr2mp3lou" path="res://game/scripts/GameManager.cs" id="26_6ubu6"]
 [ext_resource type="Texture2D" uid="uid://biu3q2ejc2rio" path="res://Asset/UI/Button_Resume.png" id="26_l4bo2"]
 [ext_resource type="Script" uid="uid://xeji45fvsdxo" path="res://game/scripts/Portal.cs" id="26_ladnh"]
 [ext_resource type="PackedScene" uid="uid://cwcfvdbaw6jq3" path="res://game/scenes/gate.tscn" id="27_ladnh"]
@@ -6331,7 +6331,7 @@ navigation_mesh = SubResource("NavigationMesh_y7bt7")
 
 [node name="Level" parent="NavigationRegion3D" instance=ExtResource("1_any33")]
 
-[node name="GameLevel" type="Node3D" parent="." node_paths=PackedStringArray("GameFinishRestartButton", "GameOverRestartButton", "GamePauseRestartButton", "GameFinishMainMenuButton", "GameOverMainMenuButton", "GamePauseMainMenuButton", "GamePauseResumeButton")]
+[node name="GameLevel" type="Node3D" parent="." node_paths=PackedStringArray("GameFinishRestartButton", "GameOverRestartButton", "GamePauseRestartButton", "GameFinishMainMenuButton", "GameOverMainMenuButton", "GamePauseMainMenuButton", "GamePauseResumeButton", "Player", "GameplayUIManager", "Portal")]
 script = ExtResource("26_6ubu6")
 GameFinishRestartButton = NodePath("../UI/ControlGame/GameFinish/VBoxContainer/ButtonRestart")
 GameOverRestartButton = NodePath("../UI/ControlGame/GameOver/VBoxContainer/ButtonRestart")
@@ -6340,6 +6340,9 @@ GameFinishMainMenuButton = NodePath("../UI/ControlGame/GameFinish/VBoxContainer/
 GameOverMainMenuButton = NodePath("../UI/ControlGame/GameOver/VBoxContainer/ButtonMainMenu")
 GamePauseMainMenuButton = NodePath("../UI/ControlGame/GamePause/VBoxContainer/ButtonMainMenu")
 GamePauseResumeButton = NodePath("../UI/ControlGame/GamePause/VBoxContainer/ButtonResume")
+Player = NodePath("../Player")
+GameplayUIManager = NodePath("../UI")
+Portal = NodePath("Portal")
 
 [node name="Level01" type="Node3D" parent="GameLevel"]
 script = ExtResource("19_4k5wf")

@@ -22,6 +22,7 @@ public partial class GameplayUIManager : Node3D
 
     public Label LabelCoin;
 
+
     public override void _Ready()
     {
         LabelCoin = GetNode<Label>("%LabelCoin");
