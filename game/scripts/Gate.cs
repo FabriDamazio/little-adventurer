@@ -7,6 +7,6 @@ public partial class Gate : Node3D
 
     public void Open()
     {
-        AnimationPlayer.Play("Open");
+        AnimationPlayer.Play("open");
     }
 }
