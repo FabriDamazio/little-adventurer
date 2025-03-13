@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Little Adventurer"
-run/main_scene="uid://c1vrn3t8p1h8r"
+run/main_scene="uid://bhcvfrlnxl4pj"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

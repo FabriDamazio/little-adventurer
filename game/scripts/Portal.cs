@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Portal : Node3D
 {
-    public int CoinRequired = 3;
+    public int CoinRequired = 10;
 
     [Export]
     public Label TextLabel;

@@ -6326,6 +6326,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881157, 0, -18.3632)
 [node name="CollectableCoin3" parent="Coins" instance=ExtResource("6_8l4sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43637, 0, -18.3632)
 
+[node name="CollectableCoin4" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43637, 2.5, -37.6798)
+
+[node name="CollectableCoin5" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43637, 2.5, -49.6959)
+
+[node name="CollectableCoin6" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.64401, 2.5, -50.1016)
+
+[node name="CollectableCoin7" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9297, 6.5, -71.9496)
+
+[node name="CollectableCoin8" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4322, 6.5, -71.9496)
+
+[node name="CollectableCoin9" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4322, 6.5, -86.2114)
+
+[node name="CollectableCoin10" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8194, 6.5, -78.1845)
+
+[node name="CollectableCoin11" parent="Coins" instance=ExtResource("6_8l4sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13954, 10.5, -93.2034)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_y7bt7")
 
