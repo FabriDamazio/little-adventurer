@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=4 uid="uid://c1vrn3t8p1h8r"]
+[gd_scene load_steps=88 format=4 uid="uid://c1vrn3t8p1h8r"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_any33"]
 [ext_resource type="Script" uid="uid://d6h11j851sfc" path="res://game/scripts/PlayerCharacter.cs" id="2_o3v1u"]
@@ -17,12 +17,26 @@
 [ext_resource type="Script" uid="uid://chxmsa17or1dw" path="res://game/scripts/PlayerDead.cs" id="8_usg65"]
 [ext_resource type="Script" uid="uid://co1r66re1ucm5" path="res://game/scripts/state/PlayerAttack.cs" id="9_m2l23"]
 [ext_resource type="PackedScene" uid="uid://k5prn3b4lgvq" path="res://Asset/VFX/Scene/hit_particle.tscn" id="11_bccyy"]
+[ext_resource type="Texture2D" uid="uid://ccawsi43dcwkf" path="res://Asset/UI/Text_YouMadeIt.png" id="16_sp6xb"]
+[ext_resource type="Texture2D" uid="uid://ch22horvt7u3o" path="res://Asset/UI/Line.png" id="17_popxd"]
+[ext_resource type="Texture2D" uid="uid://dgwtgy78acpav" path="res://Asset/UI/Button_Restart.png" id="18_rrjyk"]
 [ext_resource type="Script" uid="uid://dm60m8x3ml7wo" path="res://game/scripts/Spawner.cs" id="19_4k5wf"]
+[ext_resource type="Texture2D" uid="uid://c8npx20nnsseq" path="res://Asset/UI/Button_Restart pressed.png" id="19_cs6a8"]
+[ext_resource type="Texture2D" uid="uid://c8c1twbjnftaj" path="res://Asset/UI/Button_Restart_hover.png" id="20_6ubu6"]
 [ext_resource type="PackedScene" uid="uid://n6v6l7t0w0fs" path="res://game/scenes/enemy.tscn" id="20_usg65"]
+[ext_resource type="Texture2D" uid="uid://b3pidqujb0qn2" path="res://Asset/UI/Button_MainMenu.png" id="21_cs6a8"]
+[ext_resource type="Texture2D" uid="uid://cq4dmmpftf17s" path="res://Asset/UI/Button_MainMenu_pressed.png" id="22_6ubu6"]
+[ext_resource type="Texture2D" uid="uid://i6y04e36frcg" path="res://Asset/UI/Button_MainMenu_hover.png" id="23_mudlw"]
+[ext_resource type="Texture2D" uid="uid://ccxs78bwrumgx" path="res://Asset/UI/Text_GAMEOVER.png" id="24_f87b8"]
+[ext_resource type="Texture2D" uid="uid://bpdqrpwukluk0" path="res://Asset/UI/Text_PAUSE.png" id="25_7wmiq"]
 [ext_resource type="PackedScene" uid="uid://bj8v5o040vyyn" path="res://Asset/Environment/Scene/portal.tscn" id="25_usg65"]
+[ext_resource type="Script" uid="uid://bpmxtr2mp3lou" path="res://game/scripts/GameManagr.cs" id="26_6ubu6"]
+[ext_resource type="Texture2D" uid="uid://biu3q2ejc2rio" path="res://Asset/UI/Button_Resume.png" id="26_l4bo2"]
 [ext_resource type="Script" uid="uid://xeji45fvsdxo" path="res://game/scripts/Portal.cs" id="26_ladnh"]
 [ext_resource type="PackedScene" uid="uid://cwcfvdbaw6jq3" path="res://game/scenes/gate.tscn" id="27_ladnh"]
 [ext_resource type="Script" uid="uid://pb5agttpmjxr" path="res://game/scripts/SubViewportResizer.cs" id="27_rknej"]
+[ext_resource type="Texture2D" uid="uid://cr4g2dpyvgndu" path="res://Asset/UI/Button_Resume_pressed.png" id="27_v5cc6"]
+[ext_resource type="Texture2D" uid="uid://boqqrbrayhs18" path="res://Asset/UI/Button_Resume_hover.png" id="28_21356"]
 [ext_resource type="Texture2D" uid="uid://wr1irf2y371x" path="res://Asset/Environment/Texture/Base_Color.png" id="28_mdega"]
 [ext_resource type="Texture2D" uid="uid://duoeqvqtin52j" path="res://Asset/Environment/Texture/Base_AO.png" id="29_sp6xb"]
 [ext_resource type="Texture2D" uid="uid://k5lkttmr1bn0" path="res://Asset/Environment/Texture/pillar_35_low_E.png" id="30_popxd"]
@@ -6094,18 +6108,22 @@ light_energy = 0.5
 light_specular = 0.2
 omni_range = 3.0
 
-[node name="UI" type="Node3D" parent="."]
+[node name="UI" type="Node3D" parent="." node_paths=PackedStringArray("Player", "HealthBar", "BlackColorRect", "GameFinish", "GameOver", "GamePause")]
+script = ExtResource("7_gtgrq")
+Player = NodePath("../Player")
+HealthBar = NodePath("ControlGameplayUI/MarginContainer2/HBoxContainerHealth/ProgressBar")
+BlackColorRect = NodePath("ControlGame/ColorRect")
+GameFinish = NodePath("ControlGame/GameFinish")
+GameOver = NodePath("ControlGame/GameOver")
+GamePause = NodePath("ControlGame/GamePause")
 
-[node name="ControlGameplayUI" type="Control" parent="UI" node_paths=PackedStringArray("Player", "HealthBar")]
+[node name="ControlGameplayUI" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("7_gtgrq")
-Player = NodePath("../../Player")
-HealthBar = NodePath("MarginContainer2/HBoxContainerHealth/ProgressBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/ControlGameplayUI"]
 layout_mode = 1
@@ -6154,6 +6172,149 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6oioe")
 value = 50.0
 show_percentage = false
 
+[node name="ControlGame" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/ControlGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.376471)
+
+[node name="GameFinish" type="CenterContainer" parent="UI/ControlGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlGame/GameFinish"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="UI/ControlGame/GameFinish/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("16_sp6xb")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlGame/GameFinish/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_popxd")
+
+[node name="ButtonRestart" type="TextureButton" parent="UI/ControlGame/GameFinish/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("18_rrjyk")
+texture_pressed = ExtResource("19_cs6a8")
+texture_hover = ExtResource("20_6ubu6")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="UI/ControlGame/GameFinish/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("21_cs6a8")
+texture_pressed = ExtResource("22_6ubu6")
+texture_hover = ExtResource("23_mudlw")
+stretch_mode = 3
+
+[node name="GameOver" type="CenterContainer" parent="UI/ControlGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlGame/GameOver"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="UI/ControlGame/GameOver/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("24_f87b8")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlGame/GameOver/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_popxd")
+
+[node name="ButtonRestart" type="TextureButton" parent="UI/ControlGame/GameOver/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("18_rrjyk")
+texture_pressed = ExtResource("19_cs6a8")
+texture_hover = ExtResource("20_6ubu6")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="UI/ControlGame/GameOver/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("21_cs6a8")
+texture_pressed = ExtResource("22_6ubu6")
+texture_hover = ExtResource("23_mudlw")
+stretch_mode = 3
+
+[node name="GamePause" type="CenterContainer" parent="UI/ControlGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ControlGame/GamePause"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="UI/ControlGame/GamePause/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("25_7wmiq")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ControlGame/GamePause/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_popxd")
+
+[node name="ButtonResume" type="TextureButton" parent="UI/ControlGame/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("26_l4bo2")
+texture_pressed = ExtResource("27_v5cc6")
+texture_hover = ExtResource("28_21356")
+
+[node name="ButtonRestart" type="TextureButton" parent="UI/ControlGame/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("18_rrjyk")
+texture_pressed = ExtResource("19_cs6a8")
+texture_hover = ExtResource("20_6ubu6")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="UI/ControlGame/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("21_cs6a8")
+texture_pressed = ExtResource("22_6ubu6")
+texture_hover = ExtResource("23_mudlw")
+stretch_mode = 3
+
 [node name="Coins" type="Node3D" parent="."]
 
 [node name="CollectableCoin" parent="Coins" instance=ExtResource("6_8l4sb")]
@@ -6170,7 +6331,15 @@ navigation_mesh = SubResource("NavigationMesh_y7bt7")
 
 [node name="Level" parent="NavigationRegion3D" instance=ExtResource("1_any33")]
 
-[node name="GameLevel" type="Node3D" parent="."]
+[node name="GameLevel" type="Node3D" parent="." node_paths=PackedStringArray("GameFinishRestartButton", "GameOverRestartButton", "GamePauseRestartButton", "GameFinishMainMenuButton", "GameOverMainMenuButton", "GamePauseMainMenuButton", "GamePauseResumeButton")]
+script = ExtResource("26_6ubu6")
+GameFinishRestartButton = NodePath("../UI/ControlGame/GameFinish/VBoxContainer/ButtonRestart")
+GameOverRestartButton = NodePath("../UI/ControlGame/GameOver/VBoxContainer/ButtonRestart")
+GamePauseRestartButton = NodePath("../UI/ControlGame/GamePause/VBoxContainer/ButtonRestart")
+GameFinishMainMenuButton = NodePath("../UI/ControlGame/GameFinish/VBoxContainer/ButtonMainMenu")
+GameOverMainMenuButton = NodePath("../UI/ControlGame/GameOver/VBoxContainer/ButtonMainMenu")
+GamePauseMainMenuButton = NodePath("../UI/ControlGame/GamePause/VBoxContainer/ButtonMainMenu")
+GamePauseResumeButton = NodePath("../UI/ControlGame/GamePause/VBoxContainer/ButtonResume")
 
 [node name="Level01" type="Node3D" parent="GameLevel"]
 script = ExtResource("19_4k5wf")

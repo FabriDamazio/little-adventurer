@@ -1,12 +1,24 @@
 using Godot;
 
-public partial class GameplayUIManager : Control
+public partial class GameplayUIManager : Node3D
 {
     [Export]
     public PlayerCharacter Player;
 
     [Export]
     public ProgressBar HealthBar;
+
+    [Export]
+    public ColorRect BlackColorRect;
+
+    [Export]
+    public CenterContainer GameFinish;
+
+    [Export]
+    public CenterContainer GameOver;
+
+    [Export]
+    public CenterContainer GamePause;
 
     public Label LabelCoin;
 
@@ -17,6 +29,10 @@ public partial class GameplayUIManager : Control
 
         UpdateHealthBar(Player.CurrentHealth, Player.MaxHealth);
         Player.PlayerHealthUpdated += UpdateHealthBar;
+
+        TogglePauseUI(false);
+        ToggleGameOverUI(false);
+        ToggleGameFinishUI(false);
     }
 
     public void UpdateCoinLabel(int value)
@@ -30,4 +46,21 @@ public partial class GameplayUIManager : Control
         HealthBar.Value = percentage;
     }
 
+    public void TogglePauseUI(bool toogle)
+    {
+        BlackColorRect.Visible = toogle;
+        GamePause.Visible = toogle;
+    }
+
+    public void ToggleGameOverUI(bool toogle)
+    {
+        BlackColorRect.Visible = toogle;
+        GameOver.Visible = toogle;
+    }
+
+    public void ToggleGameFinishUI(bool toogle)
+    {
+        BlackColorRect.Visible = toogle;
+        GameFinish.Visible = toogle;
+    }
 }
