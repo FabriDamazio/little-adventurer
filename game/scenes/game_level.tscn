@@ -6212,3 +6212,46 @@ shape = SubResource("BoxShape3D_cs6a8")
 
 [node name="Gate" parent="GameLevel/Level02" instance=ExtResource("27_ladnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -53)
+
+[node name="Level03" type="Node3D" parent="GameLevel"]
+script = ExtResource("19_4k5wf")
+EnemyScene = ExtResource("20_usg65")
+
+[node name="SpawnPoints" type="Node3D" parent="GameLevel/Level03"]
+
+[node name="SpawnPoint" type="Node3D" parent="GameLevel/Level03/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.80357, 5.98021, -72.9408)
+
+[node name="Base_low" type="MeshInstance3D" parent="GameLevel/Level03/SpawnPoints/SpawnPoint"]
+transform = Transform3D(55.8582, -55.8582, -9.41699e-06, 2.35425e-06, -9.41699e-06, 78.9954, -55.8582, -55.8582, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qfw3r")
+mesh = SubResource("ArrayMesh_loggk")
+skeleton = NodePath("")
+
+[node name="SpawnPoint2" type="Node3D" parent="GameLevel/Level03/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57933, 5.98021, -73.7493)
+
+[node name="Base_low" type="MeshInstance3D" parent="GameLevel/Level03/SpawnPoints/SpawnPoint2"]
+transform = Transform3D(55.8582, -55.8582, -9.41699e-06, 2.35425e-06, -9.41699e-06, 78.9954, -55.8582, -55.8582, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qfw3r")
+mesh = SubResource("ArrayMesh_loggk")
+skeleton = NodePath("")
+
+[node name="SpawnPoint3" type="Node3D" parent="GameLevel/Level03/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4817, 5.98021, -76.4522)
+
+[node name="Base_low" type="MeshInstance3D" parent="GameLevel/Level03/SpawnPoints/SpawnPoint3"]
+transform = Transform3D(55.8582, -55.8582, -9.41699e-06, 2.35425e-06, -9.41699e-06, 78.9954, -55.8582, -55.8582, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qfw3r")
+mesh = SubResource("ArrayMesh_loggk")
+skeleton = NodePath("")
+
+[node name="SpawnTriggerZone" type="Area3D" parent="GameLevel/Level03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -65.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/Level03/SpawnTriggerZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_cs6a8")
+
+[node name="Gate" parent="GameLevel/Level03" instance=ExtResource("27_ladnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -85)
